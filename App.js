@@ -19,7 +19,7 @@ export default function App() {
   const addGoal = () => {
     setGoals((prevState) => [
       ...prevState,
-      { text: goal, key: Math.random().toString() },
+      { text: goal, id: Math.random().toString() },
     ]);
     setGoal("");
   };
@@ -45,6 +45,7 @@ export default function App() {
               </View>
             );
           }}
+          keyExtractor={(item, index) => item.id}
         />
       </View>
     </View>
