@@ -17,7 +17,10 @@ export default function App() {
     setGoal(nextText);
   };
   const addGoal = () => {
-    setGoals((prevState) => [...prevState, goal]);
+    setGoals((prevState) => [
+      ...prevState,
+      { text: goal, key: Math.random().toString() },
+    ]);
     setGoal("");
   };
 
@@ -32,16 +35,17 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoal} />
       </View>
       <View style={styles.goalsContainer}>
-        <ScrollView>
-          <Text>List of Goals</Text>
-          {goals.map((goal) => (
-            <View style={styles.goalItem}>
-              <Text key={goal} style={styles.goalText}>
-                {goal}
-              </Text>
-            </View>
-          ))}
-        </ScrollView>
+        <Text>List of Goals</Text>
+        <FlatList
+          data={goals}
+          renderItem={(data) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{data.item.text}</Text>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );
