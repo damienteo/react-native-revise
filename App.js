@@ -9,6 +9,8 @@ import {
   ScrollView,
 } from "react-native";
 
+import GoalItem from "./components/GoalItem";
+
 export default function App() {
   const [goal, setGoal] = useState("");
   const [goals, setGoals] = useState([]);
@@ -38,13 +40,7 @@ export default function App() {
         <Text>List of Goals</Text>
         <FlatList
           data={goals}
-          renderItem={(data) => {
-            return (
-              <View style={styles.goalItem}>
-                <Text style={styles.goalText}>{data.item.text}</Text>
-              </View>
-            );
-          }}
+          renderItem={(data) => <GoalItem text={data.item.text} />}
           keyExtractor={(item, index) => item.id}
         />
       </View>
