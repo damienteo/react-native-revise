@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -18,7 +18,7 @@ const generateRandomBetween = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-export default function GameScreen({ userNumber }) {
+export default function GameScreen({ userNumber, handleGameOver }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
@@ -48,6 +48,12 @@ export default function GameScreen({ userNumber }) {
 
     setCurrentGuess(nextRndNumber);
   };
+
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      handleGameOver();
+    }
+  }, [currentGuess, userNumber]);
 
   return (
     <View style={styles.screen}>
