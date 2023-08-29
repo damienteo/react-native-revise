@@ -8,10 +8,11 @@ import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(true);
 
   const handlePickNumber = (number) => {
     setUserNumber(number);
+    setGameOver(false);
   };
 
   const handleGameOver = () => {
@@ -26,7 +27,7 @@ export default function App() {
     );
   }
 
-  if (gameOver) {
+  if (gameOver && userNumber) {
     screen = <GameOverScreen />;
   }
 
